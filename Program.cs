@@ -8,15 +8,16 @@ namespace Exercise2
         private const string menuQuit = "0";
         private const string menuAge = "1";
         private const string menuPriceForCompany = "2";
+        private const string menuIterate = "3";
         private static string userInput = string.Empty;
         private static int sum;
+        private static uint[] numberOfPersons = new uint[20]; 
         public static int Age { get; set; }
-        private static uint[] numberOfPersons = new uint[20];
+        
 
         static void Main(string[] args)
         {
             bool isTrue = false;
-
 
             do
             {
@@ -41,14 +42,29 @@ namespace Exercise2
                     case menuPriceForCompany:
                         CalculatePrice();
                         break;
+                    case menuIterate:
+                        Iterate();
+                        break;
                     default:
                         Console.Clear();
                         Console.WriteLine("Wrong input, press any key to try again!");
                         Console.ReadKey();
                         break;
                 }
-
             } while (!isTrue);
+        }
+
+        private static void Iterate()
+        {
+            Console.WriteLine("Write something you wanna repeat ten times.");
+            string repeat = Console.ReadLine()!;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write($"{i + 1}.{repeat}, ");
+            }
+
+            Console.ReadKey();
         }
 
         private static void Menu()
@@ -59,6 +75,7 @@ namespace Exercise2
             Console.WriteLine("0. Quit!");
             Console.WriteLine("1. Check age");
             Console.WriteLine("2. Buy cinema tickets");
+            Console.WriteLine("3. Iterate 10 times");
         }
 
         public static int CheckAge(int number)
