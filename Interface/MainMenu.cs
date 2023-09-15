@@ -8,7 +8,7 @@ public class MainMenu
     private bool isTrue = true;
     private MenuOption userInputOption;
     public UserInterface UserInterface { get; private set; }
-    public MainMenuLogic MainMenuLogic { get; set; }
+    public MainMenuLogic MainMenuLogic { get; private set; }
     public MainMenu(UserInterface userInterface, MainMenuLogic mainMenuLogic)
     {
         UserInterface = userInterface;
