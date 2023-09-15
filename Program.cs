@@ -9,11 +9,12 @@ namespace Exercise2
         private const string menuAge = "1";
         private const string menuPriceForCompany = "2";
         private const string menuIterate = "3";
+        private const string menuThirdWord = "4";
         private static string userInput = string.Empty;
         private static int sum;
-        private static uint[] numberOfPersons = new uint[20]; 
+        private static uint[] numberOfPersons = new uint[20];
         public static int Age { get; set; }
-        
+
 
         static void Main(string[] args)
         {
@@ -28,22 +29,19 @@ namespace Exercise2
                 switch (userInput)
                 {
                     case menuQuit:
-                        isTrue = true;
-                        Console.WriteLine("Goodbye :)");
-                        Environment.Exit(0);
+                        isTrue = Quit();
                         break;
                     case menuAge:
-                        Console.WriteLine("What is your age?: ");
-                        int userInput = int.Parse(Console.ReadLine()!);
-                        CheckAge(userInput);
-                        Console.WriteLine("Press any key to return to the main menu!");
-                        Console.ReadKey();
+                        CheckAgeGroup();
                         break;
                     case menuPriceForCompany:
                         CalculatePrice();
                         break;
                     case menuIterate:
                         Iterate();
+                        break;
+                    case menuThirdWord:
+                        FindTheThirdWord();
                         break;
                     default:
                         Console.Clear();
@@ -53,31 +51,34 @@ namespace Exercise2
                 }
             } while (!isTrue);
         }
-
-        private static void Iterate()
-        {
-            Console.WriteLine("Write something you wanna repeat ten times.");
-            string repeat = Console.ReadLine()!;
-
-            for (int i = 0; i < 10; i++)
-            {
-                Console.Write($"{i + 1}.{repeat}, ");
-            }
-
-            Console.ReadKey();
-        }
-
         private static void Menu()
         {
             Console.Clear();
             Console.WriteLine("Welcome to the main menu!\n");
             Console.WriteLine("To make a selection, enter the number corresponding to your choice:");
             Console.WriteLine("0. Quit!");
-            Console.WriteLine("1. Check age");
+            Console.WriteLine("1. Check age group");
             Console.WriteLine("2. Buy cinema tickets");
             Console.WriteLine("3. Iterate 10 times");
+            Console.WriteLine("4. The third word");
         }
-
+        private static bool Quit()
+        {
+            bool isTrue;
+            isTrue = true;
+            Console.WriteLine("Goodbye :)");
+            Environment.Exit(0);
+            return isTrue;
+        }
+        private static void CheckAgeGroup()
+        {
+            Console.Clear();
+            Console.WriteLine("What is your age?: ");
+            int userInput = int.Parse(Console.ReadLine()!);
+            CheckAge(userInput);
+            Console.WriteLine("Press any key to return to the main menu!");
+            Console.ReadKey();
+        }
         public static int CheckAge(int number)
         {
             Age = number;
@@ -99,7 +100,6 @@ namespace Exercise2
             }
             return 120;
         }
-
         public static void CalculatePrice()
         {
             Console.Clear();
@@ -121,7 +121,42 @@ namespace Exercise2
             Console.WriteLine($"The total price for the company is: {sum}");
             Console.ReadKey();
         }
+        private static void Iterate()
+        {
+            Console.Clear();
+            Console.WriteLine("Write something you wanna repeat ten times.");
+            string repeat = Console.ReadLine()!;
 
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write($"{i + 1}.{repeat}, ");
+            }
+
+            Console.ReadKey();
+        }
+        private static void FindTheThirdWord()
+        {
+            Console.Clear();
+            Console.WriteLine("Write a sentence you wanna find the third word in");
+
+            string input = Console.ReadLine()!;
+            var thirdWord = input.Split(" ", input.Length);
+
+            for (int i = 0; i < thirdWord.Length; i++)
+            {
+                if (i == 2)
+                {
+                    Console.WriteLine(thirdWord[i]);
+                }
+                else
+                {
+                    Console.WriteLine(i + 1);
+                }
+            }
+
+            Console.WriteLine("Press any key to get back to main menu");
+            Console.ReadKey();
+        }
         public static int CheckIfInputIsValid(string user)
         {
             int number;
