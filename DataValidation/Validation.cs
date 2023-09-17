@@ -1,11 +1,19 @@
-﻿namespace Exercise2.DataValidation;
+﻿using Exercise2.Interface;
+
+namespace Exercise2.DataValidation;
 
 public class Validation
 {
     //Checks if the user has given us a valid number
+    public UserInterface UserInterface { get; private set; }
+    public Validation(UserInterface userInterface)
+    {
+        UserInterface = userInterface;
+    }
+
     public int CheckIfInputIsValidNumber(string prompt, int maxNumber)
     {
-        string userInput = Console.ReadLine() ?? string.Empty;
+        string userInput = UserInterface.GetUserInput();
 
         int number;
         bool isValidInput = false;
@@ -14,9 +22,10 @@ public class Validation
         {
             if (!int.TryParse(userInput, out number) || number <= 0 || number > maxNumber)
             {
-                Console.WriteLine(prompt);
-                userInput = Console.ReadLine() ?? string.Empty;
+                UserInterface.DisplayMessage(prompt);
+                userInput = UserInterface.GetUserInput();
             }
+
             else
             {
                 isValidInput = true;
@@ -35,14 +44,14 @@ public class Validation
         {
             if (string.IsNullOrWhiteSpace(userInput) || characters.Length < 2)
             {
-                Console.WriteLine("Cant be null or whitespace, and a word needs to be at least 2 characters, try again.");
-                userInput = Console.ReadLine() ?? string.Empty;
+                UserInterface.DisplayMessage("Cant be null or whitespace, and a word needs to be at least 2 characters, try again.");
+                userInput = UserInterface.GetUserInput();
                 characters = userInput.ToCharArray();
             }
             else if (int.TryParse(userInput, out int number))
             {
-                Console.WriteLine("Cant be a number, must be text try again.");
-                userInput = Console.ReadLine() ?? string.Empty;
+                UserInterface.DisplayMessage("Cant be a number, must be text try again.");
+                userInput = UserInterface.GetUserInput();
             }
             else
             {

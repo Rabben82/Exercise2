@@ -17,9 +17,17 @@ public class UserInterface
         Console.WriteLine("3. Iterate word 10 times");
         Console.WriteLine("4. Find the third word");
     }
-    public void DisplayMessage(string message)
+    public void DisplayMessage(string message, bool waitForKeyPress = false)
     {
         Console.WriteLine(message);
-        Console.ReadKey();
+        if (waitForKeyPress == true)
+        {
+            Console.ReadKey();
+        }
+    }
+
+    public void ClearConsole()
+    {
+        Console.Clear();
     }
 }

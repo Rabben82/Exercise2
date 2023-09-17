@@ -59,50 +59,46 @@ public class MainMenu
     public bool Quit()
     {
         isTrue = false;
-        Console.WriteLine("Goodbye :)");
+        UserInterface.DisplayMessage("Goodbye :)");
         Environment.Exit(0);
         return isTrue;
     }
     public void CheckAgeGroup()
     {
-        Console.Clear();
-        Console.WriteLine("What is your age?: ");
+        UserInterface.ClearConsole();
+        UserInterface.DisplayMessage("What's your age?: ");
         MainMenuLogic.CheckPrice();
-        Console.WriteLine("Press any key to return to the main menu!");
-        Console.ReadKey();
+        UserInterface.DisplayMessage("Press any key to return to the main menu!", isTrue);
     }
     public void CalculatePrice()
     {
-        Console.Clear();
-        Console.WriteLine("How many are attending the cinema?");
+        UserInterface.ClearConsole();
+        UserInterface.DisplayMessage("How many are attending the cinema?");
         var price = MainMenuLogic.GetPrice();
-        Console.WriteLine($"The total price for the company is: {price}");
-        Console.ReadKey();
+        UserInterface.DisplayMessage($"The total price for the company is: {price}kr\nPress any key to return to the main menu.", isTrue);
     }
     public void IterateWord()
     {
-        Console.Clear();
-        Console.WriteLine("Write something you wanna repeat ten times.");
+        UserInterface.ClearConsole();
+        UserInterface.DisplayMessage("Write something you wanna repeat ten times.");
         var result = MainMenuLogic.Iteration();
         PrintResult(result);
-        Console.WriteLine("Press any key to get back to main menu.");
-        Console.ReadKey();
+        UserInterface.DisplayMessage("Press any key to get back to main menu.", isTrue);
     }
     public void PrintThirdWordInSentence()
     {
-        Console.Clear();
-        Console.WriteLine("Write a sentence you wanna find the third word in.");
+        UserInterface.ClearConsole();
+        UserInterface.DisplayMessage("Write a sentence you wanna find the third word in.");
         var result = MainMenuLogic.FindWord();
         PrintResult(result);
-        Console.WriteLine("\nPress any key to get back to main menu.");
-        Console.ReadKey();
+        UserInterface.DisplayMessage("\nPress any key to get back to main menu.", isTrue);
     }
 
     public void PrintResult(List<string> result)
     {
         foreach (var items in result)
         {
-            Console.WriteLine(items);
+            UserInterface.DisplayMessage(items);
         }
     }
 
