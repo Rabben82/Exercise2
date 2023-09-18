@@ -4,13 +4,12 @@ namespace Exercise2.DataValidation;
 
 public class Validation
 {
-    //Checks if the user has given us a valid number
     public UserInterface UserInterface { get; private set; }
     public Validation(UserInterface userInterface)
     {
         UserInterface = userInterface;
     }
-
+    //Checks if the user has given us a valid number
     public int CheckIfInputIsValidNumber(string prompt, int maxNumber)
     {
         string userInput = UserInterface.GetUserInput();

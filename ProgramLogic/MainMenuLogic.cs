@@ -10,8 +10,10 @@ public class MainMenuLogic
     private const int MaxGroupSize = 10;
     private const int PrintIndexFromPosition1 = 1;
     private const int MinWords = 3;
+
     private int sum;
     private int[] numberOfPersons = new int[MaxGroupSize];
+    public int Age { get; set; }
     public Validation Validation { get; private set; }
     public UserInterface UserInterface { get; private set; }
     public MainMenuLogic(Validation validation, UserInterface userInterface)
@@ -20,7 +22,7 @@ public class MainMenuLogic
         UserInterface = userInterface;
     }
 
-    public int Age { get; set; }
+    //Checks the price based on the age group
     public int CheckPrice()
     {
         var validAge = Validation.CheckIfInputIsValidNumber("Not a valid age, can't be 0 and not older than 110\nTry again!", MaxAge);
@@ -55,7 +57,9 @@ public class MainMenuLogic
         }
         return (int)AgeGroupPrice.Standard;
     }
-    public int GetPrice()
+
+    //Get's the price of the based on the age group and people in the company
+    public int GetPriceOfCompany()
     {
         int validCompany = Validation.CheckIfInputIsValidNumber("Not a valid number, a company needs to be 1-10.\nTry again!", MaxGroupSize);
         sum = 0;//reset the total price of the company back to zero before calculating
@@ -74,6 +78,7 @@ public class MainMenuLogic
         return sum;
     }
 
+    //Find the third word in a sentence inputted by the user
     public List<string> FindWord()
     {
         bool isTrue = false;
@@ -116,6 +121,8 @@ public class MainMenuLogic
 
         return wordsList;
     }
+
+    //Iterates through 10times of a word that has been inputted by the user
     public List<string> Iteration()
     {
         string userInput = UserInterface.GetUserInput();

@@ -5,7 +5,8 @@ namespace Exercise2.Interface;
 
 public class MainMenu
 {
-    private bool isTrue = true;
+    private bool waitForKeyPress = true;
+    private bool isQuitRequested = true;
     private MenuOption userInputOption;
     public UserInterface UserInterface { get; private set; }
     public MainMenuLogic MainMenuLogic { get; private set; }
@@ -28,7 +29,7 @@ public class MainMenu
                 switch (userInputOption)
                 {
                     case MenuOption.Quit:
-                        isTrue = Quit();
+                        isQuitRequested = Quit();
                         break;
                     case MenuOption.CheckAgeGroup:
                         CheckAgeGroup();
@@ -53,29 +54,29 @@ public class MainMenu
             }
 
 
-        } while (isTrue);
+        } while (isQuitRequested);
     }
 
     public bool Quit()
     {
-        isTrue = false;
+        isQuitRequested = false;
         UserInterface.DisplayMessage("Goodbye :)");
         Environment.Exit(0);
-        return isTrue;
+        return isQuitRequested;
     }
     public void CheckAgeGroup()
     {
         UserInterface.ClearConsole();
         UserInterface.DisplayMessage("What's your age?: ");
         MainMenuLogic.CheckPrice();
-        UserInterface.DisplayMessage("Press any key to return to the main menu!", isTrue);
+        UserInterface.DisplayMessage("Press any key to return to the main menu!", waitForKeyPress);
     }
     public void CalculatePrice()
     {
         UserInterface.ClearConsole();
         UserInterface.DisplayMessage("How many are attending the cinema?");
-        var price = MainMenuLogic.GetPrice();
-        UserInterface.DisplayMessage($"The total price for the company is: {price}kr\nPress any key to return to the main menu.", isTrue);
+        var price = MainMenuLogic.GetPriceOfCompany();
+        UserInterface.DisplayMessage($"The total price for the company is: {price}kr\nPress any key to return to the main menu.", waitForKeyPress);
     }
     public void IterateWord()
     {
@@ -83,7 +84,7 @@ public class MainMenu
         UserInterface.DisplayMessage("Write something you wanna repeat ten times.");
         var result = MainMenuLogic.Iteration();
         PrintResult(result);
-        UserInterface.DisplayMessage("Press any key to get back to main menu.", isTrue);
+        UserInterface.DisplayMessage("Press any key to get back to main menu.", waitForKeyPress);
     }
     public void PrintThirdWordInSentence()
     {
@@ -91,9 +92,9 @@ public class MainMenu
         UserInterface.DisplayMessage("Write a sentence you wanna find the third word in.");
         var result = MainMenuLogic.FindWord();
         PrintResult(result);
-        UserInterface.DisplayMessage("\nPress any key to get back to main menu.", isTrue);
+        UserInterface.DisplayMessage("\nPress any key to get back to main menu.", waitForKeyPress);
     }
-
+    //prints the result of iterations to the console
     public void PrintResult(List<string> result)
     {
         foreach (var items in result)
